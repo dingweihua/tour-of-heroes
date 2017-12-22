@@ -65,4 +65,10 @@ export class HeroService {
     );
   }
 
+  addHero(hero: Hero): Observable<Hero> {
+    return this.http.post<Hero>(this.heroesUrl, hero, httpOptions).pipe(
+      tap((h: Hero) => this.log(`added hero w/ id=${h.id}`)),
+      catchError(this.handleError<Hero>('addHero'))
+    );
+  }
 }
